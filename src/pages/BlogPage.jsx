@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import BackButton from '../components/BackButton';
+import { useState } from 'react';
+import { studyThoughts } from '../data/study-thoughts';
+import { motion as Motion, AnimatePresence } from 'framer-motion';
 import { colors } from '../constants/colors';
 import { articlesData } from '../constants/articles';
 import { musicData } from '../constants/musicData';
@@ -22,7 +24,8 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
     ];
 
     return (
-        <motion.div
+        <Motion.div
+            className="blog-original-sidebar"
             initial={{ x: -30, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
@@ -37,7 +40,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
                 borderRight: `1px solid ${colors.blogLine}`
             }}
         >
-            <motion.div
+            <Motion.div
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
@@ -58,22 +61,25 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
                 <p style={{ margin: '0.5rem 0 0', fontSize: '0.9rem', color: colors.blogText, opacity: 0.8 }}>
                     '我們的世界應該只剩彼此'
                 </p>
-            </motion.div>
+            </Motion.div>
 
             <nav>
                 {menuItems.map((item, index) => (
-                    <motion.div
+                    <Motion.button
+                        type="button"
+                        aria-pressed={activeTab === item.id}
                         key={item.id}
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.3 + (index * 0.05) }}
                         onClick={() => setActiveTab(item.id)}
-                        whileHover={{ x: 5, backgroundColor: 'rgba(129, 90, 91, 0.1)' }}
+                        whileHover={{ x: 5, backgroundColor: 'rgba(121, 98, 129, 0.1)' }}
                         whileTap={{ scale: 0.98 }}
                         style={{
                             padding: '1rem',
+                            width: '100%', textAlign: 'left', border: 'none', fontFamily: 'inherit', fontSize: '1rem',
                             marginBottom: '0.5rem',
-                            borderRadius: '12px',
+                            borderRadius: '4px',
                             cursor: 'pointer',
                             color: activeTab === item.id ? colors.blogCardBg : colors.blogText,
                             backgroundColor: activeTab === item.id ? colors.blogAccent : 'transparent',
@@ -82,15 +88,15 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
                         }}
                     >
                         {item.label}
-                    </motion.div>
+                    </Motion.button>
                 ))}
             </nav>
-        </motion.div>
+        </Motion.div>
     );
 };
 
 const MomentsContent = () => (
-    <motion.div
+    <Motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -100,18 +106,18 @@ const MomentsContent = () => (
         <h2 style={{ color: colors.blogAccent, marginBottom: '2rem' }}>朋友圈</h2>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
             {momentsData.map((moment, index) => (
-                <motion.div
-                    key={moment.id}
+                <Motion.div
+                    key={moment.img}
                     layout
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.1, duration: 0.5 }}
                     whileHover={{ y: -5 }}
                     style={{
-                        backgroundColor: '#f9f5e7',
-                        borderRadius: '20px',
+                        backgroundColor: colors.blogCardBg,
+                        borderRadius: '6px',
                         overflow: 'hidden',
-                        boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+                        boxShadow: '0 2px 8px rgba(47,35,55,0.035), inset 0 0 0 1px rgba(121,98,129,0.10)',
                         cursor: 'pointer',
                         display: 'flex',
                         flexDirection: 'column',
@@ -120,7 +126,7 @@ const MomentsContent = () => (
                     }}
                 >
                     <p style={{
-                        color: '#5d5d5d',
+                        color: colors.blogText,
                         marginBottom: '1.5rem',
                         fontSize: '1.1rem',
                         lineHeight: 1.5
@@ -130,7 +136,7 @@ const MomentsContent = () => (
                     <div style={{
                         width: '100%',
                         height: '220px',
-                        borderRadius: '12px',
+                        borderRadius: '4px',
                         overflow: 'hidden',
                         backgroundColor: '#fff'
                     }}>
@@ -145,43 +151,43 @@ const MomentsContent = () => (
                             }}
                         />
                     </div>
-                </motion.div>
+                </Motion.div>
             ))}
         </div>
-    </motion.div>
+    </Motion.div>
 );
 
 
 const ArticlesListContent = ({ onSelectArticle }) => (
-    <motion.div
+    <Motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
         style={{ padding: '3rem', maxWidth: '800px', margin: '0 auto' }}
     >
-        <motion.h2
+        <Motion.h2
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
             style={{ color: colors.blogAccent, marginBottom: '2rem', fontSize: '2.5rem' }}
         >
             Written Words
-        </motion.h2>
+        </Motion.h2>
 
-        <motion.div
+        <Motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             style={{
                 backgroundColor: colors.blogCardBg,
                 padding: '2rem',
-                borderRadius: '20px',
-                boxShadow: '0 8px 30px rgba(0,0,0,0.08)'
+                borderRadius: '6px',
+                boxShadow: '0 3px 12px rgba(47,35,55,0.045), inset 0 0 0 1px rgba(121,98,129,0.10)'
             }}
         >
             {articlesData.map((article, index) => (
-                <motion.div
+                <Motion.div
                     key={article.id}
                     initial={{ opacity: 0, x: -15 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -200,12 +206,12 @@ const ArticlesListContent = ({ onSelectArticle }) => (
                         display: 'flex',
                         alignItems: 'center',
                         cursor: 'pointer',
-                        borderRadius: '8px',
+                        borderRadius: '4px',
                         paddingLeft: '0.5rem',
                         transition: 'all 0.2s ease'
                     }}
                 >
-                    <motion.div
+                    <Motion.div
                         whileHover={{ rotate: 360, scale: 1.1 }}
                         transition={{ duration: 0.6, ease: "easeInOut" }}
                         style={{
@@ -224,31 +230,31 @@ const ArticlesListContent = ({ onSelectArticle }) => (
                         }}
                     >
                         {String(index + 1).padStart(2, '0')}
-                    </motion.div>
+                    </Motion.div>
                     <div>
-                        <motion.h3
+                        <Motion.h3
                             whileHover={{ color: colors.blogAccent }}
                             transition={{ duration: 0.2 }}
                             style={{ margin: 0, color: colors.blogText, fontSize: '1.2rem' }}
                         >
                             {article.title}
-                        </motion.h3>
-                        <motion.p
+                        </Motion.h3>
+                        <Motion.p
                             whileHover={{ opacity: 1 }}
                             transition={{ duration: 0.2 }}
                             style={{ margin: '0.5rem 0 0', fontSize: '0.9rem', color: colors.blogAccent, opacity: 0.8 }}
                         >
                             {article.date}
-                        </motion.p>
+                        </Motion.p>
                     </div>
-                </motion.div>
+                </Motion.div>
             ))}
-        </motion.div>
-    </motion.div>
+        </Motion.div>
+    </Motion.div>
 );
 
 const ArticleDetailContent = ({ article, onBack }) => (
-    <motion.div
+    <Motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
@@ -261,7 +267,7 @@ const ArticleDetailContent = ({ article, onBack }) => (
             backgroundColor: 'transparent'
         }}
     >
-        <motion.button
+        <Motion.button
             onClick={onBack}
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
@@ -281,23 +287,23 @@ const ArticleDetailContent = ({ article, onBack }) => (
             }}
         >
             click-return
-        </motion.button>
+        </Motion.button>
 
-        <motion.div
+        <Motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             style={{
                 backgroundColor: colors.blogCardBg,
                 padding: '4rem',
-                borderRadius: '20px',
-                boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
+                borderRadius: '6px',
+                boxShadow: '0 3px 12px rgba(47,35,55,0.045), inset 0 0 0 1px rgba(121,98,129,0.10)',
                 lineHeight: 1.8,
                 color: colors.blogText,
                 fontSize: '1.1rem'
             }}
         >
-            <motion.h1
+            <Motion.h1
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
@@ -309,9 +315,9 @@ const ArticleDetailContent = ({ article, onBack }) => (
                 }}
             >
                 {article.title}
-            </motion.h1>
+            </Motion.h1>
 
-            <motion.p
+            <Motion.p
                 initial={{ opacity: 0, y: -5 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: 0.1 }}
@@ -324,9 +330,9 @@ const ArticleDetailContent = ({ article, onBack }) => (
                 }}
             >
                 {article.date}
-            </motion.p>
+            </Motion.p>
 
-            <motion.div
+            <Motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.4, delay: 0.2 }}
@@ -337,8 +343,8 @@ const ArticleDetailContent = ({ article, onBack }) => (
                     lineHeight: 1.8
                 }}
             />
-        </motion.div>
-    </motion.div>
+        </Motion.div>
+    </Motion.div>
 );
 
 const HomeContent = () => {
@@ -355,16 +361,11 @@ const HomeContent = () => {
             content: "我之所以奉上真心，只是愿得到最真挚的缪斯",
             quote: "never regret giving "
         },
-        {
-            id: 3,
-            date: "2026.2.1",
-            content: "此刻，我好想细水长流，渐入人心，想让未来的爱人逐渐沾染上我的气味",
-            quote: "欲哭无泪了，刷tiktok感触了"
-        },
+        ...studyThoughts.map(item => ({ id: 'study-' + item.id, date: '学习随想', content: item.title + ' ' + item.content, quote: '' })),
     ];
 
     return (
-        <motion.div
+        <Motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -374,7 +375,8 @@ const HomeContent = () => {
             <h2 style={{ color: colors.blogAccent, marginBottom: '2rem', fontSize: '2.2rem' }}>some little says～</h2>
 
             {sayings.map((saying, index) => (
-                <motion.div
+                <Motion.div
+                    className="blog-note-card"
                     key={saying.id}
                     initial={{ scale: 0.95, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
@@ -382,8 +384,8 @@ const HomeContent = () => {
                     style={{
                         backgroundColor: colors.blogCardBg,
                         padding: '2.5rem',
-                        borderRadius: '20px',
-                        boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+                        borderRadius: '6px',
+                        boxShadow: '0 2px 8px rgba(47,35,55,0.035), inset 0 0 0 1px rgba(121,98,129,0.10)',
                         lineHeight: 1.8,
                         color: colors.blogText,
                         marginBottom: index < sayings.length - 1 ? '2rem' : '0'
@@ -399,26 +401,27 @@ const HomeContent = () => {
 
                     <p style={{ marginBottom: '1.2rem' }}>{saying.content}</p>
 
-                    <p style={{ marginTop: '1.5rem', fontStyle: 'italic', opacity: 0.8 }}>
+                    {saying.quote && <p style={{ marginTop: '1.5rem', fontStyle: 'italic', opacity: 0.8 }}>
                         "{saying.quote}"
-                    </p>
-                </motion.div>
+                    </p>}
+                </Motion.div>
             ))}
-        </motion.div>
+        </Motion.div>
     );
 };
 
 const MusicPlayer = ({ music, isCurrentPlaying, onPlaySpecificSong, index }) => {
     return (
-        <motion.div
+        <Motion.div
+            className="blog-music-card"
             layout
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             style={{
                 backgroundColor: colors.blogCardBg,
-                borderRadius: '16px',
+                borderRadius: '6px',
                 padding: '1.5rem',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
+                boxShadow: '0 2px 8px rgba(47,35,55,0.035), inset 0 0 0 1px rgba(121,98,129,0.10)',
                 overflow: 'hidden',
                 display: 'flex',
                 alignItems: 'center',
@@ -430,7 +433,7 @@ const MusicPlayer = ({ music, isCurrentPlaying, onPlaySpecificSong, index }) => 
                 height: '100px',
                 flexShrink: 0,
                 position: 'relative',
-                borderRadius: '12px',
+                borderRadius: '4px',
                 overflow: 'hidden'
             }}>
                 <img
@@ -440,11 +443,11 @@ const MusicPlayer = ({ music, isCurrentPlaying, onPlaySpecificSong, index }) => 
                         width: '100%',
                         height: '100%',
                         objectFit: 'cover',
-                        borderRadius: '12px'
+                        borderRadius: '4px'
                     }}
                 />
                 {isCurrentPlaying && (
-                    <motion.div
+                    <Motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: [1, 1.2, 1] }}
                         transition={{ repeat: Infinity, duration: 1.5 }}
@@ -455,7 +458,7 @@ const MusicPlayer = ({ music, isCurrentPlaying, onPlaySpecificSong, index }) => 
                             transform: 'translate(-50%, -50%)',
                             width: '40px',
                             height: '40px',
-                            backgroundColor: 'rgba(129, 90, 91, 0.8)',
+                            backgroundColor: 'rgba(121, 98, 129, 0.8)',
                             borderRadius: '50%',
                             display: 'flex',
                             justifyContent: 'center',
@@ -465,7 +468,7 @@ const MusicPlayer = ({ music, isCurrentPlaying, onPlaySpecificSong, index }) => 
                         }}
                     >
                         ♪
-                    </motion.div>
+                    </Motion.div>
                 )}
             </div>
 
@@ -484,39 +487,22 @@ const MusicPlayer = ({ music, isCurrentPlaying, onPlaySpecificSong, index }) => 
                     alignItems: 'center',
                     padding: '1rem',
                     backgroundColor: colors.sidebarBg,
-                    borderRadius: '12px'
+                    borderRadius: '4px'
                 }}>
                     <div>
                         <h4 style={{ margin: 0, color: colors.blogAccent, fontSize: '1rem' }}>{music.title}</h4>
                         <p style={{ margin: '0.2rem 0 0', fontSize: '0.85rem', color: colors.blogText, opacity: 0.8 }}>{music.artist}</p>
                     </div>
 
-                    <motion.button
-                        onClick={() => onPlaySpecificSong(index)}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        style={{
-                            padding: '0.6rem 1.2rem',
-                            backgroundColor: colors.blogAccent,
-                            color: colors.blogCardBg,
-                            border: 'none',
-                            borderRadius: '25px',
-                            cursor: 'pointer',
-                            fontSize: '0.9rem',
-                            fontWeight: 'bold',
-                            boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
-                        }}
-                    >
-                        {isCurrentPlaying ? '❚❚' : '▶'}
-                    </motion.button>
+                    <button className="track-play" onClick={() => onPlaySpecificSong(index)} aria-label={`${isCurrentPlaying ? '暂停' : '播放'} ${music.title}`}>{isCurrentPlaying ? 'Ⅱ' : '▷'}</button>
                 </div>
             </div>
-        </motion.div>
+        </Motion.div>
     );
 };
 
 const MusicContent = ({ onTogglePlayer, isPlaying, currentSong, onPlaySpecificSong }) => (
-    <motion.div
+    <Motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -530,24 +516,7 @@ const MusicContent = ({ onTogglePlayer, isPlaying, currentSong, onPlaySpecificSo
     >
         <h2 style={{ color: colors.blogAccent, marginBottom: '2rem', fontSize: '2.2rem' }}>分享音乐</h2>
 
-        <motion.button
-            onClick={onTogglePlayer}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            style={{
-                marginBottom: '2rem',
-                padding: '0.8rem 1.5rem',
-                backgroundColor: colors.blogAccent,
-                color: colors.blogCardBg,
-                border: 'none',
-                borderRadius: '25px',
-                cursor: 'pointer',
-                fontSize: '1rem',
-                fontWeight: 'bold'
-            }}
-        >
-            {isPlaying ? '播放器' : '播放器'}
-        </motion.button>
+        <button className="music-entry" onClick={onTogglePlayer} aria-label="打开迷你音乐播放器" title="打开播放器"><span aria-hidden="true">♪</span></button>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             {musicData.map((music, index) => (
@@ -560,7 +529,7 @@ const MusicContent = ({ onTogglePlayer, isPlaying, currentSong, onPlaySpecificSo
                 />
             ))}
         </div>
-    </motion.div>
+    </Motion.div>
 );
 
 function BlogPage({ onBack, onTogglePlayer, isPlaying, currentSong, onPlaySpecificSong }) {
@@ -593,7 +562,8 @@ function BlogPage({ onBack, onTogglePlayer, isPlaying, currentSong, onPlaySpecif
     };
 
     return (
-        <motion.div
+        <Motion.div
+            className="blog-theme"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -604,17 +574,18 @@ function BlogPage({ onBack, onTogglePlayer, isPlaying, currentSong, onPlaySpecif
                 overflow: 'hidden'
             }}
         >
-            <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+            <Sidebar activeTab={activeTab} setActiveTab={(tab) => { setActiveTab(tab); setSelectedArticle(null); }} />
 
-            <div style={{
+            <div className="blog-original-content" style={{
                 flex: 1,
+                minWidth: 0,
                 overflowY: 'auto',
                 position: 'relative',
                 msOverflowStyle: 'none',
                 scrollbarWidth: 'none'
             }}>
                 <AnimatePresence mode="wait">
-                    <motion.div
+                    <Motion.div
                         key={activeTab + (selectedArticle ? '-detail' : '-list')}
                         layout
                         initial={{ opacity: 0, x: 20, scale: 0.98 }}
@@ -623,33 +594,12 @@ function BlogPage({ onBack, onTogglePlayer, isPlaying, currentSong, onPlaySpecif
                         transition={{ duration: 0.5, ease: "easeInOut" }}
                     >
                         {renderMainContent()}
-                    </motion.div>
+                    </Motion.div>
                 </AnimatePresence>
 
-                <motion.button
-                    onClick={onBack}
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    style={{
-                        position: 'fixed',
-                        top: '2rem',
-                        right: '2rem',
-                        padding: '0.6rem 1.2rem',
-                        border: 'none',
-                        borderRadius: '30px',
-                        backgroundColor: colors.blogAccent,
-                        color: colors.blogCardBg,
-                        cursor: 'pointer',
-                        fontWeight: 'bold',
-                        zIndex: 100,
-                        boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
-                    }}
-                >
-                    return
-                </motion.button>
+                <BackButton onClick={onBack} area="blog" />
             </div>
-        </motion.div>
+        </Motion.div>
     );
 }
 

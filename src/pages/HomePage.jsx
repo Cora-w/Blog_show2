@@ -1,7 +1,8 @@
-import { motion } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion as Motion, useReducedMotion } from 'framer-motion';
 import { colors } from '../constants/colors';
 
-function HomePage({ onNavigate, onTogglePlayer }) {
+const createLines = () => {
     const lines = [];
     if (typeof window !== 'undefined') {
         for (let i = 0; i < 50; i++) {
@@ -23,10 +24,13 @@ function HomePage({ onNavigate, onTogglePlayer }) {
         }
     }
 
-    const DynamicLine = ({ line }) => (
-        <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{
+    return lines;
+};
+
+const DynamicLine = ({ line, index, reduced }) => (
+        <Motion.div
+            initial={reduced ? false : { opacity: 0, scale: 0.8 }}
+            animate={reduced ? { opacity: line.opacity, scale: 1 } : {
                 opacity: [line.opacity * 0.5, line.opacity, line.opacity * 0.5],
                 scale: [1, 1.05, 1]
             }}
@@ -49,7 +53,7 @@ function HomePage({ onNavigate, onTogglePlayer }) {
         >
             <svg width="100%" height="100%" style={{ position: 'absolute', overflow: 'visible' }}>
                 <defs>
-                    <filter id={`glow-${line.color}`}>
+                    <filter id={`glow-${index}`}>
                         <feGaussianBlur stdDeviation="1.5" result="coloredBlur" />
                         <feMerge>
                             <feMergeNode in="coloredBlur" />
@@ -64,22 +68,35 @@ function HomePage({ onNavigate, onTogglePlayer }) {
                     strokeWidth="1.5"
                     opacity={line.opacity}
                     strokeLinecap="round"
-                    filter={`url(#glow-${line.color})`}
+                    filter={`url(#glow-${index})`}
                 />
             </svg>
-        </motion.div>
+        </Motion.div>
     );
 
+
+function HomePage({ onNavigate }) {
+    const [lines] = useState(createLines);
+    const layer = useRef(null);
+    const reduced = useReducedMotion();
+    const handlePointerMove = event => {
+        if (reduced || event.pointerType === 'touch') return;
+        layer.current.style.transform = `translate(${(event.clientX / window.innerWidth - 0.5) * 16}px, ${(event.clientY / window.innerHeight - 0.5) * 16}px)`;
+    };
+
     return (
-        <motion.div
+        <Motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            className="home-original"
+            onPointerMove={handlePointerMove}
+            onPointerLeave={() => { layer.current.style.transform = 'translate(0, 0)'; }}
             style={{ width: '100%', height: '100%', backgroundColor: colors.bg, position: 'relative', overflow: 'hidden' }}
         >
-            {lines.map((line, i) => (
-                <DynamicLine key={i} line={line} />
-            ))}
+            <div ref={layer} className="home-line-layer">{lines.map((line, i) => (
+                <DynamicLine key={i} line={line} index={i} reduced={reduced} />
+            ))}</div>
 
             <div style={{
                 position: 'relative',
@@ -88,11 +105,11 @@ function HomePage({ onNavigate, onTogglePlayer }) {
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '100vh',
+                height: '100%',
                 textAlign: 'center',
                 pointerEvents: 'none'
             }}>
-                <motion.h1
+                <Motion.h1
                     initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
                     animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                     transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
@@ -102,68 +119,68 @@ function HomePage({ onNavigate, onTogglePlayer }) {
                         margin: 0,
                         fontWeight: 700,
                         letterSpacing: -2,
-                        textShadow: '0 4px 20px rgba(129, 90, 91, 0.1)'
+                        textShadow: 'none'
                     }}
                 >
                     Lovin Myself
-                </motion.h1>
+                </Motion.h1>
 
-                <motion.p
+                <Motion.p
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4, duration: 1 }}
                     style={{ fontSize: 'clamp(1rem, 2vw, 1.5rem)', color: colors.line3, marginTop: '1.5rem', maxWidth: '600px', lineHeight: 1.6 }}
                 >
                     I've allowed myself to drift.
-                </motion.p>
+                </Motion.p>
 
                 <div style={{ marginTop: '4rem', display: 'flex', gap: '2rem', pointerEvents: 'auto' }}>
-                    <motion.button
+                    <Motion.button
                         style={{
-                            backgroundColor: 'rgba(129, 90, 91, 0.85)',
+                            backgroundColor: colors.accent,
                             color: '#fff',
                             fontSize: '1rem',
                             cursor: 'pointer',
                             padding: '14px 32px',
                             border: 'none',
-                            borderRadius: '30px',
+                            borderRadius: '4px',
                             backdropFilter: 'blur(5px)',
-                            boxShadow: '0 4px 15px rgba(129, 90, 91, 0.2)'
+                            boxShadow: '0 2px 6px rgba(32, 35, 42, 0.10)'
                         }}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.8, type: 'spring', stiffness: 100 }}
-                        whileHover={{ scale: 1.05, backgroundColor: 'rgba(129, 90, 91, 1)' }}
+                        whileHover={{ scale: 1.05, backgroundColor: '#294AB9' }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => onNavigate('stu')}
                     >
                         STU
-                    </motion.button>
+                    </Motion.button>
 
-                    <motion.button
+                    <Motion.button
                         style={{
                             padding: '14px 32px',
                             border: 'none',
-                            borderRadius: '30px',
-                            backgroundColor: 'rgba(129, 90, 91, 0.85)',
+                            borderRadius: '4px',
+                            backgroundColor: colors.blogAccent,
                             color: '#fff',
                             fontSize: '1rem',
                             cursor: 'pointer',
                             backdropFilter: 'blur(5px)',
-                            boxShadow: '0 4px 15px rgba(129, 90, 91, 0.2)'
+                            boxShadow: '0 2px 6px rgba(32, 35, 42, 0.10)'
                         }}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1, type: 'spring', stiffness: 100 }}
-                        whileHover={{ scale: 1.05, backgroundColor: 'rgba(129, 90, 91, 1)' }}
+                        whileHover={{ scale: 1.05, backgroundColor: '#644F6C' }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => onNavigate('blog')}
                     >
                         BLOG
-                    </motion.button>
+                    </Motion.button>
                 </div>
             </div>
-        </motion.div>
+        </Motion.div>
     );
 }
 
