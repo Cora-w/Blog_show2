@@ -143,14 +143,14 @@ function HomePage({ onNavigate }) {
                             cursor: 'pointer',
                             padding: '14px 32px',
                             border: 'none',
-                            borderRadius: '4px',
+                            borderRadius: '24px',
                             backdropFilter: 'blur(5px)',
-                            boxShadow: '0 2px 6px rgba(32, 35, 42, 0.10)'
+                            boxShadow: '0 2px 6px rgba(46, 36, 27, 0.10)'
                         }}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.8, type: 'spring', stiffness: 100 }}
-                        whileHover={{ scale: 1.05, backgroundColor: '#294AB9' }}
+                        whileHover={{ scale: 1.05, backgroundColor: '#70482A' }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => onNavigate('stu')}
                     >
@@ -161,18 +161,18 @@ function HomePage({ onNavigate }) {
                         style={{
                             padding: '14px 32px',
                             border: 'none',
-                            borderRadius: '4px',
+                            borderRadius: '24px',
                             backgroundColor: colors.blogAccent,
                             color: '#fff',
                             fontSize: '1rem',
                             cursor: 'pointer',
                             backdropFilter: 'blur(5px)',
-                            boxShadow: '0 2px 6px rgba(32, 35, 42, 0.10)'
+                            boxShadow: '0 2px 6px rgba(46, 36, 27, 0.10)'
                         }}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1, type: 'spring', stiffness: 100 }}
-                        whileHover={{ scale: 1.05, backgroundColor: '#644F6C' }}
+                        whileHover={{ scale: 1.05, backgroundColor: '#5F3C20' }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => onNavigate('blog')}
                     >

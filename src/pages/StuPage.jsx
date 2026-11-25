@@ -21,8 +21,8 @@ function LibraryContent({ tab }) {
         <div className="library-filters" aria-label="按技术标签筛选">{tags.map(value => <button key={value} aria-pressed={tag === value} className={tag === value ? 'is-active' : ''} onClick={() => setTag(value)}>{value}</button>)}</div>
         <p className="library-count" role="status">{filtered.length} 条内容</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            {filtered.map((item, index) => <Motion.article key={item.id} className="library-card" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.04, duration: 0.25 }} whileHover={{ y: -3, boxShadow: '0 4px 12px rgba(54,91,214,0.07)' }}
-                style={{ backgroundColor: colors.cardBg, padding: '2rem', borderRadius: '6px', boxShadow: '0 2px 8px rgba(23,26,32,0.025)' }}>
+            {filtered.map((item, index) => <Motion.article key={item.id} className="library-card" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.04, duration: 0.25 }} whileHover={{ y: -3, boxShadow: '0 4px 12px rgba(138,90,59,0.08)' }}
+                style={{ backgroundColor: colors.cardBg, padding: '2rem', borderRadius: '10px', boxShadow: '0 2px 8px rgba(46,36,27,0.03)' }}>
                 <p className="library-kind">{item.type}</p>
                 <h3 style={{ color: colors.accent, fontSize: '1.2rem' }}>{item.title}</h3>
                 <p style={{ margin: '1rem 0', lineHeight: 1.8, color: colors.text }}>{item.summary}</p>

@@ -4,7 +4,7 @@ body {
   margin: 0;
   font-family: 'Noto Serif SC', serif;
   overflow: hidden;
-  background-color: #F4F5F7;
+  background-color: #F5F2EE;
 }
 
 .app-container {
@@ -31,15 +31,15 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #F4F6F8;
+  background-color: #F5F0E8;
 }
 
-.main-title { font-size: 4rem; color: #365BD6; margin-bottom: 1rem; }
-.subtitle { font-size: 1.5rem; color: #365BD6; opacity: 0.8; margin-bottom: 3rem; }
+.main-title { font-size: 4rem; color: #8A5A3B; margin-bottom: 1rem; }
+.subtitle { font-size: 1.5rem; color: #8A5A3B; opacity: 0.8; margin-bottom: 3rem; }
 .button-group { display: flex; gap: 20px; }
 .btn-primary { 
-  padding: 12px 32px; border-radius: 4px; border: none; 
-  background-color: #365BD6; color: #fff; cursor: pointer; 
+  padding: 12px 32px; border-radius: 8px; border: none; 
+  background-color: #8A5A3B; color: #fff; cursor: pointer; 
   font-family: inherit; font-size: 1rem;
 }
 
@@ -47,7 +47,7 @@ body {
 .page-stu {
   width: 100%;
   height: 100%;
-  background-color: #F4F6F8; 
+  background-color: #F5F0E8; 
   position: absolute;
   top: 0; left: 0;
 }
@@ -56,7 +56,7 @@ body {
   width: 100%;
   height: 100%;
   display: flex;
-  background-color: #F4F6F8; 
+  background-color: #F5F0E8; 
   position: absolute;
   top: 0; left: 0;
 }
@@ -64,8 +64,8 @@ body {
 .sidebar {
   width: 250px;
   height: 100%;
-  background-color: #ECE8F0;
-  border-right: 1px solid #DFD8E4;
+  background-color: #EBE0CF;
+  border-right: 1px solid #E0D2BA;
   padding: 2rem;
 }
 
@@ -79,9 +79,9 @@ body {
   margin-top: auto;
   padding: 10px 20px;
   background: transparent;
-  border: 1px solid #365BD6;
-  color: #365BD6;
-  border-radius: 6px;
+  border: 1px solid #8A5A3B;
+  color: #8A5A3B;
+  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -91,5 +91,5 @@ body {
   display: flex; gap: 1.5rem;
 }
 
-.nav-link { cursor: pointer; color: #365BD6; padding: 0.5rem 1rem; border-radius: 6px; }
-.nav-link.active { background-color: #365BD6; color: #fff; }
+.nav-link { cursor: pointer; color: #8A5A3B; padding: 0.5rem 1rem; border-radius: 10px; }
+.nav-link.active { background-color: #8A5A3B; color: #fff; }

@@ -73,13 +73,13 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.3 + (index * 0.05) }}
                         onClick={() => setActiveTab(item.id)}
-                        whileHover={{ x: 5, backgroundColor: 'rgba(121, 98, 129, 0.1)' }}
+                        whileHover={{ x: 5, backgroundColor: 'rgba(124, 79, 47, 0.1)' }}
                         whileTap={{ scale: 0.98 }}
                         style={{
                             padding: '1rem',
                             width: '100%', textAlign: 'left', border: 'none', fontFamily: 'inherit', fontSize: '1rem',
                             marginBottom: '0.5rem',
-                            borderRadius: '4px',
+                            borderRadius: '16px',
                             cursor: 'pointer',
                             color: activeTab === item.id ? colors.blogCardBg : colors.blogText,
                             backgroundColor: activeTab === item.id ? colors.blogAccent : 'transparent',
@@ -100,7 +100,7 @@ const MomentsContent = () => (
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.25 }}
         style={{ padding: '3rem', height: '100%', overflowY: 'auto' }}
     >
         <h2 style={{ color: colors.blogAccent, marginBottom: '2rem' }}>朋友圈</h2>
@@ -111,13 +111,13 @@ const MomentsContent = () => (
                     layout
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    transition={{ delay: index * 0.04, duration: 0.25 }}
                     whileHover={{ y: -5 }}
                     style={{
                         backgroundColor: colors.blogCardBg,
-                        borderRadius: '6px',
+                        borderRadius: '22px',
                         overflow: 'hidden',
-                        boxShadow: '0 2px 8px rgba(47,35,55,0.035), inset 0 0 0 1px rgba(121,98,129,0.10)',
+                        boxShadow: '0 2px 8px rgba(46,36,27,0.035), inset 0 0 0 1px rgba(124,79,47,0.10)',
                         cursor: 'pointer',
                         display: 'flex',
                         flexDirection: 'column',
@@ -136,7 +136,7 @@ const MomentsContent = () => (
                     <div style={{
                         width: '100%',
                         height: '220px',
-                        borderRadius: '4px',
+                        borderRadius: '8px',
                         overflow: 'hidden',
                         backgroundColor: '#fff'
                     }}>
@@ -163,13 +163,13 @@ const ArticlesListContent = ({ onSelectArticle }) => (
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
         style={{ padding: '3rem', maxWidth: '800px', margin: '0 auto' }}
     >
         <Motion.h2
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.25 }}
             style={{ color: colors.blogAccent, marginBottom: '2rem', fontSize: '2.5rem' }}
         >
             Written Words
@@ -178,12 +178,12 @@ const ArticlesListContent = ({ onSelectArticle }) => (
         <Motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
             style={{
                 backgroundColor: colors.blogCardBg,
                 padding: '2rem',
-                borderRadius: '6px',
-                boxShadow: '0 3px 12px rgba(47,35,55,0.045), inset 0 0 0 1px rgba(121,98,129,0.10)'
+                borderRadius: '22px',
+                boxShadow: '0 3px 12px rgba(46,36,27,0.045), inset 0 0 0 1px rgba(124,79,47,0.10)'
             }}
         >
             {articlesData.map((article, index) => (
@@ -191,7 +191,7 @@ const ArticlesListContent = ({ onSelectArticle }) => (
                     key={article.id}
                     initial={{ opacity: 0, x: -15 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.06, duration: 0.2 }}
+                    transition={{ delay: index * 0.04, duration: 0.15 }}
                     onClick={() => onSelectArticle(article)}
                     whileHover={{
                         x: 15,
@@ -206,7 +206,7 @@ const ArticlesListContent = ({ onSelectArticle }) => (
                         display: 'flex',
                         alignItems: 'center',
                         cursor: 'pointer',
-                        borderRadius: '4px',
+                        borderRadius: '8px',
                         paddingLeft: '0.5rem',
                         transition: 'all 0.2s ease'
                     }}
@@ -258,7 +258,7 @@ const ArticleDetailContent = ({ article, onBack }) => (
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
+        transition={{ duration: 0.25, ease: "easeOut" }}
         style={{
             padding: '3rem',
             maxWidth: '800px',
@@ -292,12 +292,12 @@ const ArticleDetailContent = ({ article, onBack }) => (
         <Motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
             style={{
                 backgroundColor: colors.blogCardBg,
                 padding: '4rem',
-                borderRadius: '6px',
-                boxShadow: '0 3px 12px rgba(47,35,55,0.045), inset 0 0 0 1px rgba(121,98,129,0.10)',
+                borderRadius: '22px',
+                boxShadow: '0 3px 12px rgba(46,36,27,0.045), inset 0 0 0 1px rgba(124,79,47,0.10)',
                 lineHeight: 1.8,
                 color: colors.blogText,
                 fontSize: '1.1rem'
@@ -306,7 +306,7 @@ const ArticleDetailContent = ({ article, onBack }) => (
             <Motion.h1
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
+                transition={{ duration: 0.25 }}
                 style={{
                     color: colors.blogAccent,
                     marginBottom: '0.5rem',
@@ -320,7 +320,7 @@ const ArticleDetailContent = ({ article, onBack }) => (
             <Motion.p
                 initial={{ opacity: 0, y: -5 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.1 }}
+                transition={{ duration: 0.2, delay: 0.05 }}
                 style={{
                     fontSize: '0.9rem',
                     color: colors.blogAccent,
@@ -335,7 +335,7 @@ const ArticleDetailContent = ({ article, onBack }) => (
             <Motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.4, delay: 0.2 }}
+                transition={{ duration: 0.25, delay: 0.1 }}
                 className="article-content"
                 dangerouslySetInnerHTML={{ __html: article.content }}
                 style={{
@@ -369,7 +369,7 @@ const HomeContent = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.3 }}
             style={{ padding: '3rem', maxWidth: '800px', margin: '0 auto' }}
         >
             <h2 style={{ color: colors.blogAccent, marginBottom: '2rem', fontSize: '2.2rem' }}>some little says～</h2>
@@ -380,12 +380,12 @@ const HomeContent = () => {
                     key={saying.id}
                     initial={{ scale: 0.95, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.8, delay: index * 0.1, type: "spring", stiffness: 50 }}
+                    transition={{ duration: 0.3, delay: index * 0.04, ease: "easeOut" }}
                     style={{
                         backgroundColor: colors.blogCardBg,
                         padding: '2.5rem',
-                        borderRadius: '6px',
-                        boxShadow: '0 2px 8px rgba(47,35,55,0.035), inset 0 0 0 1px rgba(121,98,129,0.10)',
+                        borderRadius: '22px',
+                        boxShadow: '0 2px 8px rgba(46,36,27,0.035), inset 0 0 0 1px rgba(124,79,47,0.10)',
                         lineHeight: 1.8,
                         color: colors.blogText,
                         marginBottom: index < sayings.length - 1 ? '2rem' : '0'
@@ -419,9 +419,9 @@ const MusicPlayer = ({ music, isCurrentPlaying, onPlaySpecificSong, index }) => 
             animate={{ opacity: 1, x: 0 }}
             style={{
                 backgroundColor: colors.blogCardBg,
-                borderRadius: '6px',
+                borderRadius: '22px',
                 padding: '1.5rem',
-                boxShadow: '0 2px 8px rgba(47,35,55,0.035), inset 0 0 0 1px rgba(121,98,129,0.10)',
+                boxShadow: '0 2px 8px rgba(46,36,27,0.035), inset 0 0 0 1px rgba(124,79,47,0.10)',
                 overflow: 'hidden',
                 display: 'flex',
                 alignItems: 'center',
@@ -433,7 +433,7 @@ const MusicPlayer = ({ music, isCurrentPlaying, onPlaySpecificSong, index }) => 
                 height: '100px',
                 flexShrink: 0,
                 position: 'relative',
-                borderRadius: '4px',
+                borderRadius: '8px',
                 overflow: 'hidden'
             }}>
                 <img
@@ -443,7 +443,7 @@ const MusicPlayer = ({ music, isCurrentPlaying, onPlaySpecificSong, index }) => 
                         width: '100%',
                         height: '100%',
                         objectFit: 'cover',
-                        borderRadius: '4px'
+                        borderRadius: '8px'
                     }}
                 />
                 {isCurrentPlaying && (
@@ -458,7 +458,7 @@ const MusicPlayer = ({ music, isCurrentPlaying, onPlaySpecificSong, index }) => 
                             transform: 'translate(-50%, -50%)',
                             width: '40px',
                             height: '40px',
-                            backgroundColor: 'rgba(121, 98, 129, 0.8)',
+                            backgroundColor: 'rgba(124, 79, 47, 0.8)',
                             borderRadius: '50%',
                             display: 'flex',
                             justifyContent: 'center',
@@ -487,7 +487,7 @@ const MusicPlayer = ({ music, isCurrentPlaying, onPlaySpecificSong, index }) => 
                     alignItems: 'center',
                     padding: '1rem',
                     backgroundColor: colors.sidebarBg,
-                    borderRadius: '4px'
+                    borderRadius: '8px'
                 }}>
                     <div>
                         <h4 style={{ margin: 0, color: colors.blogAccent, fontSize: '1rem' }}>{music.title}</h4>
@@ -506,7 +506,7 @@ const MusicContent = ({ onTogglePlayer, isPlaying, currentSong, onPlaySpecificSo
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.25 }}
         style={{
             padding: '3rem',
             maxWidth: '900px',
@@ -587,11 +587,10 @@ function BlogPage({ onBack, onTogglePlayer, isPlaying, currentSong, onPlaySpecif
                 <AnimatePresence mode="wait">
                     <Motion.div
                         key={activeTab + (selectedArticle ? '-detail' : '-list')}
-                        layout
-                        initial={{ opacity: 0, x: 20, scale: 0.98 }}
-                        animate={{ opacity: 1, x: 0, scale: 1 }}
-                        exit={{ opacity: 0, x: -20, scale: 0.98 }}
-                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                        initial={{ opacity: 0, x: 12 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -12 }}
+                        transition={{ duration: 0.18, ease: "easeOut" }}
                     >
                         {renderMainContent()}
                     </Motion.div>
